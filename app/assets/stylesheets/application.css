@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: #f5f5f5;
+}
+
+.merit {
+ display: flex;
+ margin-bottom: 4px;
+}
+
+.one {
+  width: 33%;
+  padding: 7px;
+}
+
+.two {
+  width: 33%;
+  padding: 7px;
+}
+
+.three {
+  width: 33%;
+  padding: 7px;
+}
