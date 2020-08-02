@@ -1,19 +1,3 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-
 body {
   background-color: #f5f5f5;
 }
@@ -36,4 +20,37 @@ body {
 .three {
   width: 33%;
   padding: 7px;
+}
+
+.suppl-box {
+  margin: 5px;
+  border: solid 2px #dcdcdc;
+  border-radius: 2px;
+  font-size: 16px;
+}
+
+.suppl-img > a > img {
+  max-width: 100%;
+  height: auto;
+}
+
+.link-btn {
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+.btn-square {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #668ad8;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;
+}
+.btn-square:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
 }

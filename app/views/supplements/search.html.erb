@@ -1,0 +1,36 @@
+<div class="border-bottom text-center">
+  <h1>商品検索</h1>
+</div>
+<%= form_with url: search_supplements_path, method: :get, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :item_name, 'アイテム名' %>
+    <%= f.select :item_name, {'プロテイン': 'プロテイン', 'アミノ酸': 'アミノ酸'}, { include_blank: '選択してください。'}, {class: 'form-control', required: true} %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :price, '価格' %>
+    <%= f.select :price, {'5000円以下': 5000, '3000円以下': 3000}, { include_blank: '選択してください。'}, {class: 'form-control'} %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.submit '検索', class: 'btn btn-primary btn-block' %>
+  </div>
+<% end %>
+<h1 class="text-center">検索結果<h1>
+<div class="row">
+  <% @supplements.each do |supplement| %>
+    <div class="col-sm-6 col-md-3">
+      <div class="suppl-box">
+        <div class="suppl-img">
+          <%= supplement.img.html_safe %>
+        </div>
+        <p class="text-center"><%= supplement.suppl_name %></p>
+        <p class="text-center"><%= supplement.flavor %></p>
+        <div class="link-btn">
+          <%= link_to '公式ページ', "https://grong.jp", class: "btn-square" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= paginate @supplements %>
