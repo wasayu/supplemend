@@ -1,0 +1,22 @@
+<% if supplements.any? %>
+  <div class="row">
+    <% supplements.each do |supplement| %>
+      <div class="col-sm-6 col-md-3">
+        <div class="suppl-box">
+          <div class="suppl-img">
+            <%= supplement.img.html_safe %>
+          </div>
+          <p class="text-center"><%= supplement.suppl_name %></p>
+          <p class="text-center"><%= supplement.flavor %></p>
+          <div class="link-btn">
+            <%= link_to '公式ページ', supplement.url, class: "btn-square" %>
+          </div>
+          <% if logged_in? %>
+              <%= render 'favorites/like_button', supplement: supplement %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <%= paginate supplements %>
+<% end %>

@@ -1,5 +1,6 @@
 class SupplementsController < ApplicationController
   def index
+    @supplements = Supplement.order(id: :desc).page(params[:page]).per(8)
   end
   
   def search

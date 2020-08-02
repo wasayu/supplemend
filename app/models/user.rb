@@ -7,4 +7,19 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :menus
+  has_many :favorites
+  has_many :likes, through: :favorites, source: :supplement
+  
+  def like(supplement)
+    self.favorites.find_or_create_by(supplement_id: supplement.id)
+  end
+  
+  def unlike(supplement)
+    favorite = self.favorites.find_by(supplement_id: supplement.id)
+    favorite.destroy if favorite
+  end
+  
+  def like?(supplement)
+    self.likes.include?(supplement)
+  end
 end
