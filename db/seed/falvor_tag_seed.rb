@@ -1,0 +1,7 @@
+FlavorTag.create(content: '甘い')
+FlavorTag.create(content: 'フルーティー')
+FlavorTag.create(content: '甘すぎない')
+FlavorTag.create(content: 'こってり')
+FlavorTag.create(content: '朝に飲みたい')
+FlavorTag.create(content: '風呂上りに飲みたい')
+FlavorTag.create(content: '口に残らない')

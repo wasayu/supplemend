@@ -1,0 +1,30 @@
+<div class="border-bottom text-center mb-4">
+  <h1>提案メニュー</h1>
+</div>
+<h2 class="text-center mb-4">提案商品</h2>
+<div class="row mb-4">
+  <% @supplements.each do |suggestion| %>
+    <div class="col-sm-6 col-md-3">
+      <div class="suppl-box">
+        <div class="suppl-img">
+          <%= suggestion.img.html_safe %> 
+        </div>
+        <p class="text-center"><%= suggestion.suppl_name %></p>
+        <p class="text-center"><%= suggestion.flavor %></p> 
+        <div class="link-btn">
+          <%= link_to '公式ページ', suggestion.url, class: "btn-square" %>
+        </div>
+        <% if logged_in? %>
+          <%= render 'favorites/like_button', supplement: suggestion %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<h2 class="text-center mb-4">提案内容</h2>
+<div class="mb-4">
+  <%= @menu.suggestion.content %>
+</div>
+<div>
+  <h2 class="text-center mb-4"><strong>金額：<%= @total_price %>円</strong></h2>
+</div>

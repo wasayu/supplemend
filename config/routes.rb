@@ -12,7 +12,15 @@ Rails.application.routes.draw do
   
   resources :supplements do
     get :search, on: :collection
+    get :select, on: :collection
   end
   
   resources :favorites, only: [:create, :destroy]
+  
+  resources :menus, only: [:index, :show, :new, :create] do
+    get :select, on: :member
+  end
+    
+  get 'suggestions', to: 'menus#new'
+  
 end

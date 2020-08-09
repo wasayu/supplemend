@@ -12,4 +12,8 @@ class SupplementsController < ApplicationController
       @supplements = Supplement.none
     end
   end
+  
+  def select
+    
+  end
 end

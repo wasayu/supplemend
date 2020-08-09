@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_085236) do
+ActiveRecord::Schema.define(version: 2020_08_08_074745) do
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -18,14 +18,51 @@ ActiveRecord::Schema.define(version: 2020_08_02_085236) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["supplement_id"], name: "index_favorites_on_supplement_id"
+    t.index ["user_id", "supplement_id"], name: "index_favorites_on_user_id_and_supplement_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "flavor_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "suggestion_id"
+    t.index ["suggestion_id"], name: "index_menus_on_suggestion_id"
     t.index ["user_id"], name: "index_menus_on_user_id"
+  end
+
+  create_table "suggest_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "supplement_id"
+    t.bigint "suggestion_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["suggestion_id"], name: "index_suggest_details_on_suggestion_id"
+    t.index ["supplement_id"], name: "index_suggest_details_on_supplement_id"
+  end
+
+  create_table "suggestions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content"
+    t.string "purpose"
+    t.integer "budget"
+    t.string "protein_flavor"
+    t.string "amino_flavor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "suppl_menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "menu_id"
+    t.bigint "supplement_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_suppl_menus_on_menu_id"
+    t.index ["supplement_id"], name: "index_suppl_menus_on_supplement_id"
   end
 
   create_table "supplements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -45,6 +82,8 @@ ActiveRecord::Schema.define(version: 2020_08_02_085236) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "flavor_tag_id"
+    t.index ["flavor_tag_id"], name: "index_supplements_on_flavor_tag_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -57,5 +96,11 @@ ActiveRecord::Schema.define(version: 2020_08_02_085236) do
 
   add_foreign_key "favorites", "supplements"
   add_foreign_key "favorites", "users"
+  add_foreign_key "menus", "suggestions"
   add_foreign_key "menus", "users"
+  add_foreign_key "suggest_details", "suggestions"
+  add_foreign_key "suggest_details", "supplements"
+  add_foreign_key "suppl_menus", "menus"
+  add_foreign_key "suppl_menus", "supplements"
+  add_foreign_key "supplements", "flavor_tags"
 end

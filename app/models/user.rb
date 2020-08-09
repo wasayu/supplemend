@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :menus
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :likes, through: :favorites, source: :supplement
   
   def like(supplement)
@@ -22,4 +22,5 @@ class User < ApplicationRecord
   def like?(supplement)
     self.likes.include?(supplement)
   end
+  
 end
