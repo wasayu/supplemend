@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   
   def counts(user)
     @count_likes = user.likes.count
+    @count_menus = user.menus.where(saving: 1).count
   end
   
   private

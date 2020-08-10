@@ -1,0 +1,24 @@
+<div class="border-bottom text-center">
+  <h1>商品選択</h1>
+</div>
+<div class="row">
+<% @similar_suppls.each do |supplement| %>
+  <div class="col-sm-6 col-md-3">
+    <div class="suppl-box">
+      <div class="suppl-img">
+        <%= supplement.img.html_safe %>
+      </div>
+      <p class="text-center"><%= supplement.suppl_name %></p>
+      <p class="text-center"><%= supplement.flavor %></p>
+      <div class="link-btn">
+        <%= link_to '公式ページ', supplement.url, class: "btn-square" %>
+      </div>
+      <%= form_with(model: @menu, local: true) do |f| %>
+        <%= hidden_field_tag :supplement_id, supplement.id %>
+        <%= hidden_field_tag :before_suppl_id, @before_suppl.id %>
+        <%= f.submit '変更', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+</div>

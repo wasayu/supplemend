@@ -13,7 +13,4 @@ class SupplementsController < ApplicationController
     end
   end
   
-  def select
-    
-  end
 end

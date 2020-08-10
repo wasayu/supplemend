@@ -8,19 +8,17 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   resources :users, only: [:index, :show, :new, :create] do
     get :likes, on: :member
+    get :menus, on: :member
   end
   
   resources :supplements do
     get :search, on: :collection
-    get :select, on: :collection
   end
   
   resources :favorites, only: [:create, :destroy]
   
-  resources :menus, only: [:index, :show, :new, :create] do
-    get :select, on: :member
-  end
-    
+  resources :menus, only: [:index, :show, :new, :create, :edit, :update]
+
   get 'suggestions', to: 'menus#new'
   
 end

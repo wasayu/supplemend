@@ -37,6 +37,7 @@ body {
 .link-btn {
   text-align: center;
   padding-bottom: 4px;
+  margin-bottom: 7px;
 }
 
 .btn-square {
@@ -53,4 +54,27 @@ body {
   -webkit-transform: translateY(4px);
   transform: translateY(4px);/*下に動く*/
   border-bottom: none;/*線を消す*/
+}
+
+.menu-box {
+  margin-bottom: 4px;
+  border: solid 4px #dcdcdc;
+  border-radius: 4px;
+  padding: 7px
+}
+
+.flexbox {
+  display: flex;
+  padding: 7px;
+}
+
+.item {
+  max-width: 100%;
+  height: auto;
+  padding: 7px;
+}
+
+.item > a > img {
+  max-width: 100%;
+  height: auto;
 }

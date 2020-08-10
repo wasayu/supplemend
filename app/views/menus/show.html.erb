@@ -14,17 +14,24 @@
         <div class="link-btn">
           <%= link_to '公式ページ', suggestion.url, class: "btn-square" %>
         </div>
-        <% if logged_in? %>
-          <%= render 'favorites/like_button', supplement: suggestion %>
+        <%= form_with url: edit_menu_path(@menu), method: :get, local: true do |f| %>
+          <%= hidden_field_tag :supplement_id, suggestion.id %>
+          <%= f.submit '商品変更', class: 'btn btn-primary btn-block' %>
         <% end %>
       </div>
     </div>
   <% end %>
 </div>
 <h2 class="text-center mb-4">提案内容</h2>
-<div class="mb-4">
-  <%= @menu.suggestion.content %>
-</div>
 <div>
-  <h2 class="text-center mb-4"><strong>金額：<%= @total_price %>円</strong></h2>
+  <%= @suggestion.content %>
 </div>
+<h2 class="text-center mb-4">提案金額</h2>
+<div>
+  <h3 class="text-center mb-3"><%= @total_price %>円</h3>
+</div>
+<%= form_with(model: @menu, local: true) do |f| %>
+  <%= f.label :name, 'メニュー名' %>
+  <%= f.text_field :name %>
+  <%= f.submit 'メニュー保存', class: 'btn btn-primary btn-block' %>
+<% end %>

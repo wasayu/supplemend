@@ -30,6 +30,12 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
+  def menus
+    @user = User.find(params[:id])
+    @menu = @user.menus.where(saving: 1).order(id: :desc).page(params[:page]).per(5)
+    counts(@user)
+  end
+  
   private
   
   def user_params

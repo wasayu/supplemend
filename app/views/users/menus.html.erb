@@ -6,5 +6,22 @@
     <li class="nav-item"><a href="<%= menus_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(menus_user_path(@user)) %>">作成メニュー<span class="badge badge-secondary"><%= @count_menus %></span></a></li>
     <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">お気に入りサプリ <span class="badge badge-secondary"><%= @count_likes %></span></a></li>
   </ul>
-  <%= render 'supplements/supplements', supplements: @likes %>
+  <% if @menu.any? %>
+    <% @menu.each do |menu| %>
+      <div class="menu-box">
+        <h2 class="text-center"><%= menu.name %></h2>
+        <div class="flexbox"> 
+          <% menu.select_suppls.each do |suppl| %>
+            <div class="item">
+              <%= suppl.img.html_safe %>
+            </div>
+          <% end %>
+        </div>
+        <div class="link-btn">
+          <%= link_to 'メニュー詳細', menu_url(menu), class: "btn-square" %>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @menu %>
+  <% end %>
 </div>
