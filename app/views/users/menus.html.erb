@@ -20,6 +20,11 @@
         <div class="link-btn">
           <%= link_to 'メニュー詳細', menu_url(menu), class: "btn-square" %>
         </div>
+        <div class="link-btn">
+        <% if current_user == menu.user %>
+          <%= link_to "削除", menu, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+        <% end %>
+        </div>
       </div>
     <% end %>
     <%= paginate @menu %>

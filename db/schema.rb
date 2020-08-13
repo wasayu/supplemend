@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_064903) do
+ActiveRecord::Schema.define(version: 2020_08_11_140640) do
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 2020_08_10_064903) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "suppl_flavors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "supplement_id"
+    t.bigint "flavor_tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flavor_tag_id"], name: "index_suppl_flavors_on_flavor_tag_id"
+    t.index ["supplement_id", "flavor_tag_id"], name: "index_suppl_flavors_on_supplement_id_and_flavor_tag_id", unique: true
+    t.index ["supplement_id"], name: "index_suppl_flavors_on_supplement_id"
+  end
+
   create_table "suppl_menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "menu_id"
     t.bigint "supplement_id"
@@ -84,8 +94,6 @@ ActiveRecord::Schema.define(version: 2020_08_10_064903) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "flavor_tag_id"
-    t.index ["flavor_tag_id"], name: "index_supplements_on_flavor_tag_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -102,7 +110,8 @@ ActiveRecord::Schema.define(version: 2020_08_10_064903) do
   add_foreign_key "menus", "users"
   add_foreign_key "suggest_details", "suggestions"
   add_foreign_key "suggest_details", "supplements"
+  add_foreign_key "suppl_flavors", "flavor_tags"
+  add_foreign_key "suppl_flavors", "supplements"
   add_foreign_key "suppl_menus", "menus"
   add_foreign_key "suppl_menus", "supplements"
-  add_foreign_key "supplements", "flavor_tags"
 end

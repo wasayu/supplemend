@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:show, :likes]
-  
+  before_action :require_user_logged_in, only: [:index, :show, :destroy, :likes, :menus] 
+
   def index
   end
 
@@ -24,6 +24,13 @@ class UsersController < ApplicationController
     end
   end
   
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:success] = '退会しました。'
+    redirect_to root_path
+  end
+  
   def likes
     @user = User.find(params[:id])
     @likes = @user.likes.page(params[:page])
@@ -41,4 +48,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+  
 end

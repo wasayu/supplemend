@@ -19,7 +19,20 @@
 
   <body>
     <header class="mb-4">
-      <%= render 'layouts/navbar' %>      
+      <%= render 'layouts/navbar' %>
+      <div class="header-box">
+        <div class="header-img">
+          <img src="/assets/header3.jpg" alt="">
+        </div>
+        <div class='header-content'>
+          <div class="text-center">
+            <h1>自分だけの<br>サプリメントメニュー</h1>
+          </div>
+          <div class="text-center">
+            <%= link_to 'メニュー作成', suggestions_path, class: 'btn btn-lg btn-primary' %>
+          </div>    
+        </div>        
+      </div>
     </header>
     <div class="wrapper">      
       <div class="container">

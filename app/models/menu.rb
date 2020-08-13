@@ -2,7 +2,7 @@ class Menu < ApplicationRecord
   belongs_to :user
   belongs_to :suggestion
   
-  has_many :suppl_menus
+  has_many :suppl_menus, dependent: :destroy
   has_many :select_suppls, through: :suppl_menus, source: :supplement
   
   

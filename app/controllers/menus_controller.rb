@@ -1,5 +1,6 @@
 class MenusController < ApplicationController
   before_action :require_user_logged_in, only: [:show, :new, :edit]
+  before_action :correct_user, only: [:destroy]
   
   def index
     # 後程保存する際のコードを記述
@@ -69,10 +70,23 @@ class MenusController < ApplicationController
     end
   end
   
+  def destroy
+    @menu.destroy
+    flash[:success] = 'メッセージを削除しました。'
+    redirect_back(fallback_location: root_path)
+  end
+  
   private
 
   def menu_params
     params.require(:menu).permit(:purpose, :budget, :protein_flavor, :amino_flavor, :name)
+  end
+
+  def correct_user
+    @menu = current_user.menus.find_by(id: params[:id])
+    unless @menu
+      redirect root_url
+    end
   end
 
 end
