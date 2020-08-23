@@ -2,14 +2,15 @@
   <h1>商品選択</h1>
 </div>
 <div class="row">
-<% @similar_suppls.each do |supplement| %>
+<% @supplements.each do |supplement| %>
   <div class="col-sm-6 col-md-3">
     <div class="suppl-box">
-      <div class="suppl-img">
+      <div class="suppl-img text-center">
         <%= supplement.img.html_safe %>
       </div>
       <p class="text-center"><%= supplement.suppl_name %></p>
       <p class="text-center"><%= supplement.flavor %></p>
+      <p class="text-center">価格：<%= supplement.price %>円</p>
       <div class="link-btn">
         <%= link_to '公式ページ', supplement.url, class: "btn-square" %>
       </div>
@@ -21,4 +22,8 @@
     </div>
   </div>
 <% end %>
+</div>
+<p class="mb-4"><%= paginate @supplements %></p>
+<div class="mb-4">
+  <%= link_to 'メニュー詳細に戻る', @menu %>  
 </div>

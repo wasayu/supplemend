@@ -3,17 +3,45 @@ class MenusController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def index
-    # 後程保存する際のコードを記述
   end
   
   def show
     @menu = Menu.find(params[:id])
     @supplements = @menu.select_suppls
     @suggestion = @menu.suggestion
-    
+    @tags = []
+    @supplements.each do |suppl|
+      @primary_tag = SupplTag.where('supplement_id = ? and primary_tag = ?', suppl.id, 1)
+      @primary_tag.each do |primary_tag|
+        @tags.push(primary_tag.tag)
+      end
+    end
+
     @total_price = 0
+    @month_price = 0
+    @calorie = 0
+    @protein = 0
+    @lipid = 0
+    @carbo = 0
     @supplements.each do |supplement|
-      @total_price = @total_price + supplement.price
+      @total_price += supplement.price
+      @month_price += (supplement.price * (30 / supplement.use_time.to_f))
+      
+      if supplement.calorie.present?
+        @calorie += supplement.calorie
+      end
+      
+      if supplement.protein.present?
+        @protein += supplement.protein
+      end
+      
+      if supplement.lipid.present?
+        @lipid += supplement.lipid
+      end
+      
+      if supplement.carbo.present?
+        @carbo += supplement.carbo
+      end
     end
   end
 
@@ -42,7 +70,38 @@ class MenusController < ApplicationController
   def edit
     @menu = Menu.find(params[:id])
     @before_suppl = Supplement.find_by(id: params[:supplement_id])
-    @similar_suppls = Supplement.where('item_name = ? and price >= ? and price <= ?', @before_suppl.item_name, @before_suppl.price - 1000, @before_suppl.price + 1000)
+    
+    @suggestion = @menu.suggestion
+    @budget = @suggestion.budget
+    
+    @before_suppls = @menu.select_suppls
+    @total_price = 0
+    @month_price = 0
+    @before_suppls.each do |supplement|
+      @total_price = @total_price + supplement.price
+      @month_price += (supplement.price * (30 / supplement.use_time.to_f))
+    end
+    
+    @balance = @budget - (@total_price - @before_suppl.price)
+
+    @similar_tag = Tag.find_by(content: params[:tag_content])
+    @suppl_id = SupplTag.where('tag_id = ? and primary_tag = ?', @similar_tag.id, 1)
+
+    @suppls = []
+    @suppl_id.each do |suppl|
+      @suppls.push(suppl.supplement)
+    end
+    
+    @array = []
+    @suppls.each do |suppl|
+      @suppl_price = suppl.price
+      if (suppl.use_time >=  (@before_suppl.use_time - 10)) and (suppl.use_time <= (@before_suppl.use_time + 10)) and (@suppl_price <= @balance)
+        @array.push(suppl)
+      end
+    end
+    
+    @supplements = Kaminari.paginate_array(@array).page(params[:page]).per(8)
+    
   end
   
   def update
@@ -79,7 +138,7 @@ class MenusController < ApplicationController
   private
 
   def menu_params
-    params.require(:menu).permit(:purpose, :budget, :protein_flavor, :amino_flavor, :name)
+    params.require(:menu).permit(:purpose, :budget, :name)
   end
 
   def correct_user

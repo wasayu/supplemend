@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_140640) do
+ActiveRecord::Schema.define(version: 2020_08_21_142822) do
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -52,8 +52,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_140640) do
     t.text "content"
     t.string "purpose"
     t.integer "budget"
-    t.string "protein_flavor"
-    t.string "amino_flavor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -77,6 +75,18 @@ ActiveRecord::Schema.define(version: 2020_08_11_140640) do
     t.index ["supplement_id"], name: "index_suppl_menus_on_supplement_id"
   end
 
+  create_table "suppl_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "supplement_id"
+    t.bigint "tag_id"
+    t.boolean "primary_tag", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplement_id", "primary_tag"], name: "index_suppl_tags_on_supplement_id_and_primary_tag", unique: true
+    t.index ["supplement_id", "tag_id"], name: "index_suppl_tags_on_supplement_id_and_tag_id", unique: true
+    t.index ["supplement_id"], name: "index_suppl_tags_on_supplement_id"
+    t.index ["tag_id"], name: "index_suppl_tags_on_tag_id"
+  end
+
   create_table "supplements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "item_name"
     t.string "brand"
@@ -92,6 +102,12 @@ ActiveRecord::Schema.define(version: 2020_08_11_140640) do
     t.float "protein"
     t.text "img"
     t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -114,4 +130,6 @@ ActiveRecord::Schema.define(version: 2020_08_11_140640) do
   add_foreign_key "suppl_flavors", "supplements"
   add_foreign_key "suppl_menus", "menus"
   add_foreign_key "suppl_menus", "supplements"
+  add_foreign_key "suppl_tags", "supplements"
+  add_foreign_key "suppl_tags", "tags"
 end

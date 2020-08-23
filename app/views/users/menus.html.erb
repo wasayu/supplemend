@@ -10,10 +10,17 @@
     <% @menu.each do |menu| %>
       <div class="menu-box">
         <h2 class="text-center"><%= menu.name %></h2>
-        <div class="flexbox"> 
+        <div class="row">
           <% menu.select_suppls.each do |suppl| %>
-            <div class="item">
-              <%= suppl.img.html_safe %>
+            <div class="col-sm-6 col-md-3">
+              <div class="suppl-box">
+                <div class="suppl-img text-center">
+                  <%= suppl.img.html_safe %>
+                </div>
+                <div class="link-btn">
+                  <%= link_to '公式ページ', suppl.url, class: "btn-square" %>
+                </div>
+              </div>
             </div>
           <% end %>
         </div>
@@ -21,9 +28,9 @@
           <%= link_to 'メニュー詳細', menu_url(menu), class: "btn-square" %>
         </div>
         <div class="link-btn">
-        <% if current_user == menu.user %>
-          <%= link_to "削除", menu, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
-        <% end %>
+          <% if current_user == menu.user %>
+            <%= link_to "削除", menu, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
         </div>
       </div>
     <% end %>

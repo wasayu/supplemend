@@ -4,13 +4,19 @@ class SupplementsController < ApplicationController
   end
   
   def search
-    if params[:item_name].present? && params[:price].present?
-      @supplements = Supplement.where('item_name = ? and price < ?', params[:item_name], params[:price]).page(params[:page]).per(8)
-    elsif params[:item_name].present?
-      @supplements = Supplement.where(item_name: params[:item_name]).page(params[:page]).per(8)
-    else
-      @supplements = Supplement.none
+    @supplements = Supplement.all.page(params[:page]).per(8)
+    
+    if params[:item_name].present?
+      @supplements = @supplements.where(item_name: params[:item_name])
     end
+    
+    if params[:price].present?
+      @supplements = @supplements.where('price <= ?', params[:price])
+    end
+      
+    if params[:brand].present?
+      @supplements = @supplements.where(brand: params[:brand])
+    end  
   end
   
 end

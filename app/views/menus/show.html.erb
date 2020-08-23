@@ -4,10 +4,11 @@
 <h2 class="text-center mb-4">提案商品</h2>
 <div class="jumbotron">
   <div class="row mb-4">
-    <% @supplements.each do |suggestion| %>
+    <% @supplements.zip(@tags) do |suggestion, primary_tag| %>
       <div class="col-sm-6 col-md-3">
         <div class="suppl-box">
-          <div class="suppl-img">
+          <h4 class="text-center"><%= primary_tag.content %></h3>
+          <div class="suppl-img text-center">
             <%= suggestion.img.html_safe %> 
           </div>
           <p class="text-center"><%= suggestion.suppl_name %></p>
@@ -17,6 +18,7 @@
           </div>
           <%= form_with url: edit_menu_path(@menu), method: :get, local: true do |f| %>
             <%= hidden_field_tag :supplement_id, suggestion.id %>
+            <%= hidden_field_tag :tag_content, primary_tag.content %>
             <%= f.submit '商品変更', class: 'btn btn-primary btn-block' %>
           <% end %>
         </div>
@@ -28,14 +30,44 @@
 <div class="jumbotron">
   <%= @suggestion.content %>
 </div>
+<h2 class="text-center mb-4">摂取できる主な栄養素</h2>
+<div class="col-sm-6 offset-sm-3 mb-4">
+  <table class="table table-bordered table-striped">
+    <tr>
+      <td class="text-center">栄養素</td>
+      <td class="text-center">数値</td>
+    </tr>
+    <tr>
+      <td class="text-right">カロリー</td>
+      <td class="text-right"><%= @calorie %>Kcal</td>
+    </tr>
+    <tr>
+      <td class="text-right">タンパク質</td>
+      <td class="text-right"><%= @protein.round(1) %>g</td>
+    </tr>
+    <tr>
+      <td class="text-right">脂質</td>
+      <td class="text-right"><%= @lipid.round(1) %>g</td>
+    </tr>
+    <tr>
+      <td class="text-right">炭水化物</td>
+      <td class="text-right"><%= @carbo.round(1) %>g</td>
+    </tr>
+  </table>
+</div>
 <h2 class="text-center mb-4">提案金額</h2>
 <div class="jumbotron">
-  <h3 class="text-center mb-3"><%= @total_price %>円</h3>
+  <h3 class="text-center mb-3">総額：<%= @total_price.to_s(:delimited) %>円</h3>
+  <h3 class="text-center mb-3">月額：約<%= @month_price.round(-2).to_s(:delimited) %>円</h3>
+  <p class="text-center">※価格はHPの情報です。購入サイトによっては割引やセールを行っており、値段が違っている場合がございます。</p>
+  <p class="text-center">※月額は使用回数（目安）より30回分とした場合の金額を表示しています。</p>
 </div>
 <%= form_with(model: @menu, local: true) do |f| %>
   <div class="form-group text-center">
     <%= f.label :name, 'メニュー名' %>
     <%= f.text_field :name, class: 'form-control' %>    
   </div>
-  <%= f.submit 'メニュー保存', class: 'btn btn-primary btn-block' %>
+  <div class="mb-4">
+    <%= f.submit 'メニュー保存', class: 'btn btn-primary btn-block' %>
+  </div>
 <% end %>

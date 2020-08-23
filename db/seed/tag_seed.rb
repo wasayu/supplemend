@@ -1,0 +1,6 @@
+Tag.create(content: 'ホエイプロテイン')
+Tag.create(content: 'ソイプロテイン')
+Tag.create(content: 'BCAA')
+Tag.create(content: 'EAA')
+Tag.create(content: 'クレアチン')
+Tag.create(content: 'マルチビタミン')

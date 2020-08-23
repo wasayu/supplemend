@@ -1,0 +1,1 @@
+SuggestDetail.create(supplement_id: 379, suggestion_id: 12)
