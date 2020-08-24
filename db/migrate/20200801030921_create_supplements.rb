@@ -8,12 +8,12 @@ class CreateSupplements < ActiveRecord::Migration[5.2]
       t.string :flavor
       t.integer :price
       t.string :price_tag
-      t.string :use_time
+      t.integer :use_time
       t.integer :calorie
-      t.integer :lipid
-      t.integer :carbo
-      t.integer :protein
-      t.string :img
+      t.float :lipid
+      t.float :carbo
+      t.float :protein
+      t.text :img
       t.string :url
 
       t.timestamps
