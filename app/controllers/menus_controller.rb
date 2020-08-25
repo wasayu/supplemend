@@ -11,7 +11,7 @@ class MenusController < ApplicationController
     @suggestion = @menu.suggestion
     @tags = []
     @supplements.each do |suppl|
-      @primary_tag = SupplTag.where('supplement_id = ? and primary_tag = ?', suppl.id, 1)
+      @primary_tag = SupplTag.where('supplement_id = ? and primary_tag = ?', suppl.id, '1')
       @primary_tag.each do |primary_tag|
         @tags.push(primary_tag.tag)
       end
