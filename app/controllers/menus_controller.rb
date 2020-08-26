@@ -85,7 +85,7 @@ class MenusController < ApplicationController
     @balance = @budget - (@total_price - @before_suppl.price)
 
     @similar_tag = Tag.find_by(content: params[:tag_content])
-    @suppl_id = SupplTag.where('tag_id = ? and primary_tag = ?', @similar_tag.id, 1)
+    @suppl_id = SupplTag.where('tag_id = ? and primary_tag = ?', @similar_tag.id, '1')
 
     @suppls = []
     @suppl_id.each do |suppl|
@@ -119,7 +119,7 @@ class MenusController < ApplicationController
         render :edit
       end
     else
-      if @menu.update(name: menu_params[:name], saving: 1)
+      if @menu.update(name: menu_params[:name], saving: '1')
         flash[:success] = 'メニューを保存しました。'
         redirect_to menus_user_path(current_user)
       else
