@@ -138,6 +138,13 @@ ul.footer-menu li {
  font-family: 'Noto Serif JP', sans-serif;
 }
 
+@media screen and (max-width: 480px) { 
+  .header-content h1 {
+   font-family: 'Noto Serif JP', sans-serif;
+   font-size: 36px;
+  } 
+}
+
 .explain {
   width: 80%;
   margin: 0 auto;
