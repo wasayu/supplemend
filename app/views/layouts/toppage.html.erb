@@ -8,6 +8,7 @@
     <%= csp_meta_tag %>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -19,19 +20,49 @@
 
   <body>
     <header class="mb-4">
-      <%= render 'layouts/navbar' %>
-      <div class="header-box">
-        <div class="header-img">
-          <img src="/assets/header3.jpg" alt="">
+      <nav class="navbar navbar-expand-sm navbar-light bg">
+        <a class="navbar-brand title" href="/">Supplemend</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item"><%= link_to 'メニュー作成', suggestions_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to '商品検索', search_supplements_path, class: 'nav-link' %></li>
+            <% if logged_in? %>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-item"><%= link_to 'マイページ', user_path(current_user) %></li>
+                  <li class="dropdown-item"><%= link_to 'マイメニュー', menus_user_path(current_user) %></li>
+                  <li class="dropdown-item"><%= link_to 'お気に入り', likes_user_path(current_user) %></li>
+                  <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete, data: { confirm: '本当にログアウトしますか？' } %></li>
+                  <li class="dropdown-item"><%= link_to '退会', @user, method: :delete, data: { confirm: '本当に退会しますか？' } %></li>
+                </ul>
+              </li>
+            <% else %>
+              <li class="nav-item"><%= link_to 'アカウント作成', signup_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
+            <% end %>
+          </ul>
         </div>
-        <div class='header-content'>
+      </nav>      
+      <div class="row header-box">
+        <div class='col-md-6 header-content'>
           <div class="text-center">
-            <h1>自分だけの<br>サプリメントメニュー</h1>
+            <h1>サプリを提案します</h1>
+          </div>
+          <div class="text-center explain">
+            <p>筋トレを始めたが、一体どんなサプリメントを摂取するのが効果的なのだろうか。。。<br>あなたが筋トレをする目的、予算に応じたサプリメントを提案します。</p>
           </div>
           <div class="text-center">
-            <%= link_to 'メニュー作成', suggestions_path, class: 'btn btn-lg btn-primary' %>
+            <%= link_to '条件を入力', suggestions_path, class: 'btn-gradient-radius' %>
           </div>    
-        </div>        
+        </div>   
+        <div class="col-md-6 header-img">
+          <img src="/assets/main2.png" alt="">
+        </div>
       </div>
     </header>
     <div class="wrapper">      

@@ -9,4 +9,13 @@ class Menu < ApplicationRecord
     self.suppl_menus.build(supplement_id: supplement.id)
   end
   
+  def total_price
+    before_suppls = self.select_suppls
+    result = 0
+    before_suppls.each do |supplement|
+      result += supplement.price
+    end
+    return result
+  end
+  
 end

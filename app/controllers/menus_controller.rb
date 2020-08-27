@@ -71,36 +71,26 @@ class MenusController < ApplicationController
     @menu = Menu.find(params[:id])
     @before_suppl = Supplement.find_by(id: params[:supplement_id])
     
-    @suggestion = @menu.suggestion
-    @budget = @suggestion.budget
+    budget = @menu.suggestion.budget
     
-    @before_suppls = @menu.select_suppls
-    @total_price = 0
-    @month_price = 0
-    @before_suppls.each do |supplement|
-      @total_price = @total_price + supplement.price
-      @month_price += (supplement.price * (30 / supplement.use_time.to_f))
+    balance = budget - (@menu.total_price - @before_suppl.price)
+
+    similar_tag = Tag.find_by(content: params[:tag_content])
+    suppl_id = SupplTag.where('tag_id = ? and primary_tag = ?', similar_tag.id, '1')
+
+    suppls = []
+    suppl_id.each do |suppl|
+      suppls.push(suppl.supplement)
     end
     
-    @balance = @budget - (@total_price - @before_suppl.price)
-
-    @similar_tag = Tag.find_by(content: params[:tag_content])
-    @suppl_id = SupplTag.where('tag_id = ? and primary_tag = ?', @similar_tag.id, '1')
-
-    @suppls = []
-    @suppl_id.each do |suppl|
-      @suppls.push(suppl.supplement)
-    end
-    
-    @array = []
-    @suppls.each do |suppl|
-      @suppl_price = suppl.price
-      if (suppl.use_time >=  (@before_suppl.use_time - 10)) and (suppl.use_time <= (@before_suppl.use_time + 10)) and (@suppl_price <= @balance)
-        @array.push(suppl)
+    array = []
+    suppls.each do |suppl|
+      if (suppl.use_time >= (@before_suppl.use_time - 10)) and (suppl.use_time <= (@before_suppl.use_time + 10)) and (suppl.price <= balance)
+        array.push(suppl)
       end
     end
     
-    @supplements = Kaminari.paginate_array(@array).page(params[:page]).per(8)
+    @supplements = Kaminari.paginate_array(array).page(params[:page]).per(8)
     
   end
   
