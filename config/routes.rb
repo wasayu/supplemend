@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :new, :create, :destroy] do
     get :likes, on: :member
     get :menus, on: :member
+    get :calendars, on: :member
   end
   
   resources :supplements do
@@ -20,5 +21,7 @@ Rails.application.routes.draw do
   resources :menus, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   get 'suggestions', to: 'menus#new'
+  
+  resources :calendars, only: [:show, :new, :create, :destroy]
   
 end

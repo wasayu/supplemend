@@ -15,6 +15,7 @@
             <li class="dropdown-item"><%= link_to 'マイページ', user_path(current_user) %></li>
             <li class="dropdown-item"><%= link_to 'マイメニュー', menus_user_path(current_user) %></li>
             <li class="dropdown-item"><%= link_to 'お気に入り', likes_user_path(current_user) %></li>
+            <li class="dropdown-item"><%= link_to '使用中サプリ', calendars_user_path(current_user) %></li>
             <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete, data: { confirm: '本当にログアウトしますか？' } %></li>
             <li class="dropdown-item"><%= link_to '退会', @user, method: :delete, data: { confirm: '本当に退会しますか？' } %></li>
           </ul>

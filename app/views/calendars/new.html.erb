@@ -1,0 +1,49 @@
+<div class="border-bottom text-center">
+  <h1>使用サプリに登録</h1>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-3">
+    <div class="suppl-box">
+      <div class="suppl-img text-center">
+        <%= @supplement.img.html_safe %>
+      </div>
+      <p class="text-center"><%= @supplement.suppl_name %></p>
+      <p class="text-center"><%= @supplement.flavor %></p>
+      <p class="text-center">価格：<%= @supplement.price %>円</p>
+      <div class="link-btn">
+        <%= link_to '公式ページ', @supplement.url, class: "btn-square" %>
+      </div>
+      <div class="mb-2">
+        <% if logged_in? %>
+          <%= render 'favorites/like_button', supplement: @supplement %>
+        <% end %>
+      </div>
+    </div>
+  </div>  
+</div>
+<%= form_with(model: @calendar, local: true) do |f| %>
+  <div class="form-group text-center">
+    <%= f.label :daily, '1日の使用回数：' %>
+    <%= f.select :daily, {'1回': 1, '2回': 2, '3回': 3, '4回': 4, '5回': 5}, { include_blank: '選択してください。'}, {class: 'form-control days', required: true} %>
+  </div>
+  
+  <div class="form-group text-center">
+    <%= f.label :start_day, '使用開始日：' %>
+    <%= f.date_field :start_day, {class: 'form-control days', required: true} %>
+  </div>
+
+  <!--フォームの内容から回数に応じて、使用したサプリがなくなる日を表示したい-->
+
+  <div class="form-group text-center">
+    <%= f.label :content, 'コメント：' %>
+    <%= f.text_field :content %>
+  </div>
+  
+  <div class="form-group text-center">
+    <%= f.hidden_field :supplement_id, :value => @supplement.id %>
+    <%= f.submit '登録', class: 'btn btn-primary days' %>
+  </div>
+<% end %>
+<div class="text-center">
+  <%= link_to '戻る', :back %>
+</div>

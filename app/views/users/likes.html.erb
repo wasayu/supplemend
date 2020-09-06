@@ -5,6 +5,8 @@
   <ul class="nav nav-tabs nav-justified mb-3">
     <li class="nav-item"><a href="<%= menus_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(menus_user_path(@user)) %>">作成メニュー<span class="badge badge-secondary"><%= @count_menus %></span></a></li>
     <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">お気に入りサプリ <span class="badge badge-secondary"><%= @count_likes %></span></a></li>
+    <li class="nav-item"><a href="<%= calendars_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(calendars_user_path(@user)) %>">使用中サプリ<span class="badge badge-secondary"><%= @count_using %></span></a></li>
+    <!--使用中サプリも後程カウントする　注意点は、end_dayが本日以前のもの-->
   </ul>
   <%= render 'supplements/supplements', supplements: @likes %>
 </div>

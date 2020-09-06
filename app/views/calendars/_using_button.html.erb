@@ -1,0 +1,8 @@
+<%= form_with url: new_calendar_path, method: :get, local: true do |f| %>
+  <%= hidden_field_tag :supplement_id, supplement.id %>
+  <%= f.submit '使用中にする', class: "btn btn-primary btn-block" %>
+<% end %>
+
+<!--
+使用中止はこのページではない
+同じ商品を何個でも登録できるので、like?のようなものはいらない-->

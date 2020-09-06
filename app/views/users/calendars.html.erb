@@ -1,0 +1,43 @@
+<div class="border-bottom text-center">
+  <h1>ユーザー詳細メニュー</h1>
+</div>
+<div>
+  <ul class="nav nav-tabs nav-justified mb-3">
+    <li class="nav-item"><a href="<%= menus_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(menus_user_path(@user)) %>">作成メニュー<span class="badge badge-secondary"><%= @count_menus %></span></a></li>
+    <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">お気に入りサプリ<span class="badge badge-secondary"><%= @count_likes %></span></a></li>
+    <li class="nav-item"><a href="<%= calendars_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(calendars_user_path(@user)) %>">使用中サプリ<span class="badge badge-secondary"><%= @count_using %></span></a></li>
+  </ul>
+  <div>
+    
+
+    <h2 class="text-center">使用中のサプリ</h2>
+    <div class="row">
+      <% @using.zip(@calendars) do |supplement, calendar| %>
+        <% if (calendar.end_day - Date.today) > 0 %>
+          <div class="col-sm-6 col-md-3">
+            <div class="suppl-box">
+              <div class="suppl-img text-center">
+                <%= supplement.img.html_safe %>
+              </div>
+              <p class="text-center"><%= supplement.suppl_name %></p>
+              <p class="text-center"><%= supplement.flavor %></p>
+              <p class="text-center">価格：<%= supplement.price %>円</p>
+              <div class="link-btn">
+                <%= link_to '公式ページ', supplement.url, class: "btn-square" %>
+              </div>
+              <div class="mb-2">
+                <% if logged_in? %>
+                  <%= render 'favorites/like_button', supplement: supplement %>
+                <% end %>
+              </div>
+              <div class="text-center">
+                <%= link_to '詳細へ', calendar_url(calendar), class: 'btn-square' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <p><%= paginate @using %></p>
+  </div>
+</div>

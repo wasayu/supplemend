@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_061812) do
+ActiveRecord::Schema.define(version: 2020_08_29_063721) do
+
+  create_table "calendars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "supplement_id"
+    t.string "content"
+    t.integer "daily"
+    t.date "start_day"
+    t.date "end_day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplement_id"], name: "index_calendars_on_supplement_id"
+    t.index ["user_id"], name: "index_calendars_on_user_id"
+  end
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -120,6 +133,8 @@ ActiveRecord::Schema.define(version: 2020_08_16_061812) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "calendars", "supplements"
+  add_foreign_key "calendars", "users"
   add_foreign_key "favorites", "supplements"
   add_foreign_key "favorites", "users"
   add_foreign_key "menus", "suggestions"

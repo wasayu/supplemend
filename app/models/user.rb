@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :menus, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :likes, through: :favorites, source: :supplement
+  has_many :calendars, dependent: :destroy
+  has_many :using, through: :calendars, source: :supplement
   
   def like(supplement)
     self.favorites.find_or_create_by(supplement_id: supplement.id)

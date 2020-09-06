@@ -1,0 +1,59 @@
+<div class="border-bottom text-center mb-4">
+  <h1>使用中サプリ詳細</h1>
+</div>
+<h2 class="text-center mb-4">商品詳細</h2>
+<div class="jumbotron">
+  <div class="row mb-4">
+    <div class="col-sm-6 col-md-3">
+      <div class="suppl-box">
+        <h4 class="text-center"><%= @primary_tag.tag.content %></h4>
+        <div class="suppl-img text-center">
+          <%= @supplement.img.html_safe %>
+        </div>
+        <p class="text-center"><%= @supplement.suppl_name %></p>
+        <p class="text-center"><%= @supplement.flavor %></p>
+        <div class="link-btn">
+          <%= link_to '公式ページ', @supplement.url, class: "btn-square" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2 class="text-center mb-4">使用内容</h2>
+<div class="col-sm-6 offset-sm-3 mb-4">
+  <table class="table table-bordered table-striped">
+    <tr>
+      <td class="text-center">使用開始日</td>
+      <td class="text-center"><%= @calendar.start_day %></td>
+    </tr>
+    <tr>
+      <td class="text-center">使用終了日</td>
+      <td class="text-center"><%= @calendar.end_day %></td>
+    </tr>
+    <tr>
+      <td class="text-center">使用回数</td>
+      <td class="text-center"><%= @supplement.use_time %>回</td>
+    </tr>
+    <tr>
+      <td class="text-center">1日の使用回数</td>
+      <td class="text-center"><%= @calendar.daily %>回</td>
+    </tr>
+    <tr>
+      <td class="text-center">使用日数</td>
+      <td class="text-center"><%= @using_day %>日</td>
+    </tr>
+    <tr>
+      <td class="text-center">残り日数</td>
+      <td class="text-center"><%= @days_left.to_i %>日</td>
+    </tr>
+    <tr>
+      <td class="text-center">メモ</td>
+      <td class="text-center"><%= @calendar.content %></td>
+    </tr>
+  </table>
+</div>
+<% if current_user == @calendar.user %>
+  <div class="text-center mb-4">
+    <%= link_to "使用をやめる", @calendar, method: :delete, data: { confirm: "本当に使用をやめますか？" }, class: 'btn btn-danger btn-sm' %>
+  </div>
+<% end %>

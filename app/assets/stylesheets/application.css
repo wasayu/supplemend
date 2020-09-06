@@ -9,7 +9,7 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
- *
+ *= require simple_calendar
  *= require_tree .
  *= require_self
  */
@@ -27,6 +27,7 @@ body {
   border: solid 2px #dcdcdc;
   border-radius: 2px;
   font-size: 16px;
+  background-color: #fff;
 }
 
 .suppl-img {
@@ -175,5 +176,24 @@ ul.footer-menu li {
   justify-content: center;
 }
 
+.days {
+  display: inline;
+  width: auto;
+}
+
+.calendar {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  background-color: #fff;
+}
 
 
+.day {
+  font-weight: bold;
+  text-align: center;
+}
+
+.week {
+  background-color: #fff;
+}

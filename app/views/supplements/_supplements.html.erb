@@ -13,9 +13,16 @@
           <div class="link-btn">
             <%= link_to '公式ページ', supplement.url, class: "btn-square" %>
           </div>
-          <% if logged_in? %>
-            <%= render 'favorites/like_button', supplement: supplement %>
-          <% end %>
+          <div class="mb-2">
+            <% if logged_in? %>
+              <%= render 'favorites/like_button', supplement: supplement %>
+            <% end %>
+          </div>
+          <div>
+            <% if logged_in? %>
+              <%= render 'calendars/using_button', supplement: supplement %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
