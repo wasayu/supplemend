@@ -1,10 +1,135 @@
+
 <div class="border-bottom text-center">
-  <h1>ユーザー詳細メニュー</h1>
+  <h1>My Page</h1>
 </div>
-<div>
-  <ul class="nav nav-tabs nav-justified mb-3">
-    <li class="nav-item"><a href="<%= menus_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(menus_user_path(@user)) %>">作成メニュー</a></li>
-    <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">お気に入りサプリ <span class="badge badge-secondary"><%= @count_likes %></span></a></li>
-    <li class="nav-item"><a href="<%= calendars_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(calendars_user_path(@user)) %>">使用中サプリ<span class="badge badge-secondary"><%= @count_using %></span></a></li>  
-  </ul>
+
+<div class="mypage-box">
+  <div id="bg-img">
+    <div class="row tabs-menu mr-0">
+      <div class="card col-3 text-center">
+        <a href="#tabs-1">
+          <div class="card-header" href="#tabs-1">My Menu</div>
+          <div class="card-body" href="#tabs-1"><i class="far fa-file-alt mypage-icon" href="#tabs-1"></i></div>      
+        </a>
+      </div>
+    
+      <div class="card col-3 text-center">
+        <a href="#tabs-2">
+          <div class="card-header" href="#tabs-2">Using</div>
+          <div class="card-body" href="#tabs-2"><i class="fas fa-hourglass-half mypage-icon" href="#tabs-2"></i></div>      
+        </a>
+      </div>
+      
+      <div class="card col-3 text-center">
+        <a href="#tabs-3">
+          <div class="card-header" href="#tabs-3">Favorite</div>
+          <div class="card-body" href="#tabs-3"><i class="fas fa-star mypage-icon" href="#tabs-3"></i></div>      
+        </a>
+      </div>
+    </div>
+    
+    <section class="tabs-content">
+      <section id="tabs-1">
+        <% if @menu.any? %>
+          <% @menu.each do |menu| %>
+            <div class="menu-box mb-4">
+              <div class="row">
+                <div class="col-sm-4 menu-content">
+                  <h4 class="select-h2 text-left mb-4">メニュー名：<%= menu.name %></h4>
+                  <div class="link-btn mb-4">
+                    <%= link_to 'メニュー詳細', menu_url(menu), class: "border_slide_btn mr-4" %>
+                    <% if current_user == menu.user %>
+                      <%= link_to "削除", menu, method: :delete, data: { confirm: "You sure?" }, class: 'border_slide_btn' %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="col-sm-8">
+                  <div class="row">
+                    <% menu.select_suppls.each do |suppl| %>
+                      <div class="col-sm-6 col-md-3">
+                        <div class="suppl-box">
+                          <div class="suppl-img text-center">
+                            <%= suppl.img.html_safe %>
+                          </div>
+                          <div>
+                            <% if logged_in? %>
+                              <%= render 'calendars/using_button', supplement: suppl %>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <%= paginate @menu %>
+        <% end %>
+      </section>
+    </section>
+    
+    <section class="tabs-content">
+      <section id="tabs-2">
+        <div class="row">
+          <% @using.zip(@calendars) do |supplement, calendar| %>
+            <% if (calendar.end_day - Date.today) > 0 %>
+              <div class="col-sm-6 col-md-3">
+                <div class="suppl-box">
+                  <div class="suppl-img text-center">
+                    <%= supplement.img.html_safe %>
+                  </div>
+                  <p class="text-center"><%= supplement.suppl_name %></p>
+                  <p class="text-center"><%= supplement.flavor %></p>
+                  <p class="text-center">価格：<%= supplement.price %>円</p>
+                  <div class="mb-2" id="favorite_button_<%= supplement.id %>">
+                    <% if logged_in? %>
+                      <%= render 'favorites/like_button', supplement: supplement %>
+                    <% end %>
+                  </div>
+                  <div class="text-center">
+                    <%= link_to '詳細へ', calendar_url(calendar), class: 'btn-square' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <p><%= paginate @using %></p>
+      </section>
+    </section>
+    
+    <section class="tabs-content">
+      <section id="tabs-3">
+        <%= render 'supplements/supplements', supplements: @likes %>
+      </section>
+    </section>
+    
+    <div class="row">
+    
+      <div class="card col-3 text-center">
+        <%= link_to(search_supplements_path, class: 'card-a') do %>
+          <div class="card-header">商品一覧</div>
+          <div class="card-body"><i class="fas fa-capsules mypage-icon"></i></div>
+        <% end %>
+      </div>
+      
+      <div class="card col-3 text-center">
+        <%= link_to(suggestions_path, class: 'card-a') do %>
+          <div class="card-header">メニュー作成</div>
+          <div class="card-body"><i class="far fa-file-alt mypage-icon"></i></div>
+        <% end %>
+      </div>
+      
+      <div class="card col-3 text-center">
+        <%= link_to(root_path, class: 'card-a') do %>
+          <div class="card-header">トップぺージ</div>
+          <div class="card-body"><i class="fas fa-home mypage-icon"></i></div>
+        <% end %>
+      </div>
+    
+    </div>      
+  </div>
+
 </div>
+

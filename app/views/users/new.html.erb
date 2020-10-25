@@ -1,34 +1,40 @@
-<div class="border-bottom text-center mb-4">
-  <h1>アカウント作成</h1>
-</div>
-
 <div class="row">
-  <div class="col-sm-6">
+  <div class="login-box col-sm-6 col-10">
+    <div class="row">
+      <div class="login-title border-bottom text-center">
+        <h1>SIGN UP</h1>
+      </div>
+    </div>
     
-    <%= form_with(model: @user, local: true) do |f| %>
-      <%= render 'layouts/error_messages', model: f.object %>
+    <div class="login-form">
+      <%= form_with(model: @user, local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        
+        <div class="form-group">
+          <%= f.label :name, 'Usename' %>
+          <%= f.text_field :name, class: 'form-control login-text' %>
+        </div>
       
-      <div class="form-group">
-        <%= f.label :name, 'アカウント名' %>
-        <%= f.text_field :name, class: 'form-control' %>
-      </div>
-    
-      <div class="form-group">
-        <%= f.label :email, 'メールアドレス' %>
-        <%= f.email_field :email, class: 'form-control' %>
-      </div>
-      
-      <div class="form-gruop">
-        <%= f.label :password, 'パスワード' %>
-        <%= f.password_field :password, class: 'form-control' %>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :password_confirmation, 'パスワード確認' %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-      </div>
-      
-      <%= f.submit 'アカウント作成', class: 'btn btn-primary btn-block' %>
-    <% end %>
+        <div class="form-group">
+          <%= f.label :email, 'E-mail' %>
+          <%= f.email_field :email, class: 'form-control login-text' %>
+        </div>
+        
+        <div class="form-gruop">
+          <%= f.label :password, 'Password' %>
+          <%= f.password_field :password, class: 'form-control login-text' %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :password_confirmation, 'Confirm Paeeword' %>
+          <%= f.password_field :password_confirmation, class: 'form-control login-text' %>
+        </div>
+        
+        <%= f.submit 'Sign Up', class: 'btn btn-gradient-radius btn-block' %>
+      <% end %>      
+    </div>
+
   </div>
 </div>
+
+    

@@ -1,7 +1,10 @@
-<%= form_with url: new_calendar_path, method: :get, local: true do |f| %>
-  <%= hidden_field_tag :supplement_id, supplement.id %>
-  <%= f.submit '使用中にする', class: "btn btn-primary btn-block" %>
-<% end %>
+<div class="using-button">
+  <%= form_with url: new_calendar_path, method: :get, local: true do |f| %>
+    <%= hidden_field_tag :supplement_id, supplement.id %>
+    <%= f.submit '使用する', class: "simple_square_btn2" %>
+  <% end %>  
+</div>
+
 
 <!--
 使用中止はこのページではない

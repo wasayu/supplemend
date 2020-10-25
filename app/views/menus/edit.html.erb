@@ -1,5 +1,5 @@
 <div class="border-bottom text-center">
-  <h1>商品選択</h1>
+  <h1>類似商品</h1>
 </div>
 <div class="row">
 <% @supplements.each do |supplement| %>
@@ -11,9 +11,6 @@
       <p class="text-center"><%= supplement.suppl_name %></p>
       <p class="text-center"><%= supplement.flavor %></p>
       <p class="text-center">価格：<%= supplement.price %>円</p>
-      <div class="link-btn">
-        <%= link_to '公式ページ', supplement.url, class: "btn-square" %>
-      </div>
       <%= form_with(model: @menu, local: true) do |f| %>
         <%= hidden_field_tag :supplement_id, supplement.id %>
         <%= hidden_field_tag :before_suppl_id, @before_suppl.id %>

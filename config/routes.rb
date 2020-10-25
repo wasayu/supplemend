@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get :calendars, on: :member
   end
   
-  resources :supplements do
+  resources :supplements, only: [:show] do
     get :search, on: :collection
   end
   

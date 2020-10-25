@@ -111,7 +111,7 @@ class MenusController < ApplicationController
     else
       if @menu.update(name: menu_params[:name], saving: '1')
         flash[:success] = 'メニューを保存しました。'
-        redirect_to menus_user_path(current_user)
+        redirect_to current_user
       else
         flash.now[:danger] = 'メニューの保存に失敗しました。'
         render @menu

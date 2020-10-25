@@ -3,6 +3,10 @@ class SupplementsController < ApplicationController
     @supplements = Supplement.order(id: :desc).page(params[:page]).per(8)
   end
   
+  def show
+    
+  end
+  
   def search
     @supplements = Supplement.all.page(params[:page]).per(8)
     

@@ -1,8 +1,8 @@
 <div class="border-bottom text-center mb-4">
   <h1>使用中サプリ詳細</h1>
 </div>
-<h2 class="text-center mb-4">商品詳細</h2>
-<div class="jumbotron">
+<h2 class="select-h2 text-left mb-4">商品詳細</h2>
+<div class="menu-box">
   <div class="row mb-4">
     <div class="col-sm-6 col-md-3">
       <div class="suppl-box">
@@ -12,14 +12,11 @@
         </div>
         <p class="text-center"><%= @supplement.suppl_name %></p>
         <p class="text-center"><%= @supplement.flavor %></p>
-        <div class="link-btn">
-          <%= link_to '公式ページ', @supplement.url, class: "btn-square" %>
-        </div>
       </div>
     </div>
   </div>
 </div>
-<h2 class="text-center mb-4">使用内容</h2>
+<h2 class="select-h2 text-left mb-4">使用内容</h2>
 <div class="col-sm-6 offset-sm-3 mb-4">
   <table class="table table-bordered table-striped">
     <tr>

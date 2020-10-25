@@ -1,33 +1,154 @@
-<h2 class="text-center">--Concept--</h2>
-<div class="jumbotron">
-  <h2 class="text-center mb-4">サプリメンドについて</h2>
-  <p>身体を鍛えることにおいて、今やサプリメントは必須アイテム。また、プロテインだけでは足りない栄養があることもご存じでしょう。</p>
-  <p>では、プロテイン以外にどのようなサプリメントが有効なのだろうか、また自分の掲げている目的おいては、どんなサプリメントをどれくらいとれば良いのだろうか。。</p>
-  <p>それを解決してくれるのはこの「サプリメンド」です！！</p>
-  <p>目的、予算などの条件を入力するだけでおすすめのサプリメントをパッケージ形式でおすすめしてくれます！！</p>
+<section class="question-box">
+  <div id="bg-img">
+    <div class="animated2">
+      <div class="question-text mb-5">
+        <h2 class="question text-center">こんな悩みはありますか？</h1>
+      </div>
+      
+      <div class="row">
+        
+        <div class="col-sm-3">
+          <div class="question-flex">
+            <div class="img-question mb-5">
+              <img class="img-question__img" src="/assets/question.jpg" alt="">
+            </div>
+            <div class="text-question">
+              <h4 class="text-question__header mb-4">
+                何を摂ればいいのか？
+              </h4>
+              <p class="text-question__text">
+                サプリメントの利用を考えているけど<br>
+                何を摂れば良いのかがわからない
+              </p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-sm-3">
+          <div class="question-flex">
+            <div class="img-question mb-5">
+              <img class="img-question__img" src="/assets/question.jpg" alt="">
+            </div>
+            <div class="text-question">
+              <h4 class="text-question__header mb-4">
+                いつ飲めば良いのか？
+              </h4>
+              <p class="text-question__text">
+                サプリメントを飲むようになったが<br>
+                どのタイミングで飲むのが最適かわからない
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-sm-3">
+          <div class="question-flex">
+            <div class="img-question mb-5">
+              <img class="img-question__img" src="/assets/question.jpg" alt="">
+            </div>
+            <div class="text-question text-center">
+              <h4 class="text-question__header mb-4">
+                いくらかけているのか？
+              </h4>
+              <p class="text-question__text">
+                サプリメントを購入することになったが<br>
+                どれくらいのお金をかけてるかわからない
+              </p>
+            </div>
+          </div>  
+        </div>      
+      </div>
+    </div>    
+  </div>
+
+
+</section>
+
+<div class="concept-box mb-4">
+  <h1 class="quest text-center">Supplemendについて</h1>  
 </div>
-<h2 class="text-center">--会員特典--</h2>
-<div class="jumbotron">
-  <h3 class="text-center mb-4">アカウント作成で下記の機能が利用可能</h3>
-  <div class="row">
-    <div class="col-md-4">
-      <h4 class="text-center">１．メニュー作成</h4>
-      <p>体を鍛えている目的、予算に応じたおすすめのサプリメントのメニューを提案します。</p>
-    </div>
-    <div class="col-md-4">
-      <h4 class="text-center">２．メニューの編集</h4>
-      <p>提案したメニューの商品を自由に変更して、オリジナルのメニューを作成することができます。</p>
-    </div>
-    <div class="col-md-4">
-      <h4 class="text-center">３．お気に入り</h4>
-      <p>実際にサプリメントを使用して、気に入った商品をお気に入りすることができます。</p>
+
+<section class="sec mb-4">
+  <div class="flex">
+    <figure class="img-container col2">
+      <img class="img-container__img" src="/assets/point1-2.jpg" alt="">
+    </figure>
+    <div class="text-container col2">
+      <h2 class="select-h2 text-left">Point1：提案</h2>
+      <p class="point-text">
+        ネットで調べても、どれがおすすめかわかりにくいと感じたことがあるのでは？<br>
+        このアプリは、トレーニングの目的、初期費用によってサプリを提案します！！
     </div>
   </div>
-  <div class="text-center">
+</section>  
+<section class="sec mb-4">
+  <div class="flex">
+    <div class="text-container col2">
+      <h2 class="select-h2 text-left">Point2：知識</h2>
+      <p class="point-text">
+        サプリメントによって、飲むべきタイミングは異なります。<br>
+        このアプリは、おすすめしたサプリメントの飲むタイミングまで教えます！！
+    </div>
+    <div class="img-container col2">
+      <img class="img-container__img" src="/assets/drink3.jpg" alt="">
+    </div>
+  </div>
+</section>  
+<section class="sec">
+  <div class="flex">
+    <div class="img-container col2">
+      <img class="img-container__img" src="/assets/print-3-2.jpg" alt="">
+    </div>
+    <div class="text-container col2">
+      <h2 class="select-h2 text-left">Point3：管理</h2>
+      <p class="point-text">
+        使用しているサプリがどれくらいでなくなるかわからないですよね？<br>
+        このアプリは、使用中のサプリを登録すると、残り日数を表示し使用額等の管理ができます！
+    </div>
+  </div>
+</section>
+
+<section class="card-box">
+  <div id="bg-img">
+    <div class="row mb-5">
     <% if logged_in? %>
-      <%= link_to 'メニュー作成', suggestions_path, class: 'btn btn-lg btn-primary' %>
+      <div class="card col-3 text-center">
+        <%= link_to(user_path(current_user), class: 'card-a') do %>
+          <div class="card-header">マイページ</div>
+          <div class="card-body"><i class="fas fa-portrait mypage-icon"></i></div>
+        <% end %>
+      </div>
     <% else %>
-      <%= link_to 'アカウント作成', signup_path, class: 'btn btn-lg btn-primary' %>
+      <div class="card col-3 text-center">
+        <%= link_to(login_path, class: 'card-a') do %>
+          <div class="card-header">マイページ</div>
+          <div class="card-body"><i class="fas fa-portrait mypage-icon"></i></div>
+        <% end %>
+      </div>
+    <% end %>  
+      
+    <% if logged_in? %>
+      <div class="card col-3 text-center">
+        <%= link_to(suggestions_path, class: 'card-a') do %>
+          <div class="card-header">メニュー作成</div>
+          <div class="card-body"><i class="far fa-file-alt mypage-icon"></i></div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="card col-3 text-center">
+        <%= link_to(login_path, class: 'card-a') do %>
+          <div class="card-header">メニュー作成</div>
+          <div class="card-body"><i class="far fa-file-alt mypage-icon"></i></div>
+        <% end %>
+      </div>
     <% end %>
+
+      <div class="card col-3 text-center">
+        <%= link_to(search_supplements_path, class: 'card-a') do %>
+          <div class="card-header">商品一覧</div>
+          <div class="card-body"><i class="fas fa-capsules mypage-icon"></i></div>
+        <% end %>
+      </div>
+    </div>          
   </div>
-</div>
+</section>

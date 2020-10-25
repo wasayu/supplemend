@@ -1,18 +1,83 @@
-<div class="border-bottom text-center">
+<div class="border-bottom text-center mb-4">
   <h1>入力条件</h1>
 </div>
+
+
 <%= form_with(model: @menu, local: true) do |f| %>
-  <div class="form-group">
-    <%= f.label :purpose, '目的' %>
-    <%= f.select :purpose, {'体を大きくしたい': '体を大きくしたい', '運動不足を解消したい': '運動不足を解消したい', '体脂肪を落としたい': '体脂肪を落としたい'}, { include_blank: '選択してください。'}, {class: 'form-control', required: true} %>
+
+  
+  <div class="purpose-select mb-4">
+    <div class="row">
+      <div class="col-sm-7 mb-4">
+        <h2 class="select-h2 text-left mb-4">目的</h2>
+        <p>※トレーニングの目的をダブルクリックしてください。</p>
+      </div>
+      <div class="col-sm-7 mb-4">
+        <%= f.radio_button :purpose, "体を大きくしたい", class: 'radio-label' %>
+        <%= f.label :purpose, "体を大きくしたい", {value: "体を大きくしたい", class: 'btn btn-gradient-radius-input purpose-button'} %>        
+      </div>
+      <div class="col-sm-7 mb-4">
+        <%= f.radio_button :purpose, "運動不足を解消したい", class: 'radio-label' %>
+        <%= f.label :purpose, "運動不足を解消したい", {value: "運動不足を解消したい", class: 'btn btn-gradient-radius-input purpose-button'} %>        
+      </div>
+      <div class="col-sm-7 mb-4">
+        <%= f.radio_button :purpose, "体脂肪を落としたい", class: 'radio-label' %>
+        <%= f.label :purpose, "体脂肪を落としたい", {value: "体脂肪を落としたい", class: 'btn btn-gradient-radius-input purpose-button'} %>                
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :budget, '初期費用' %>
-    <%= f.select :budget, {'3000円以下': 3000, '5000円以下': 5000, '8000円以下': 8000, '12000円以下': 12000, '15000円以下': 15000}, { include_blank: '選択してください。'}, {class: 'form-control', required: true} %>
+  <div class="budget-select mb-4">
+    <div class="row">
+      <div class="col-sm-7 mb-4">
+        <h2 class="select-h2 text-left mb-4">費用</h2>
+        <p>※希望する費用をダブルクリックしてください。</p>
+      </div>
+      <div class="col-sm-7 mb-4">
+        <%= f.radio_button :budget, "3000円以下", class: 'radio-label', id: 'a1' %>
+        <%= f.label :budget, "3000円以下", {value: 3000, class: 'btn btn-gradient-radius-input budget-button', for: 'a1'} %>
+      </div>
+      <div class="col-sm-7 mb-4">
+        <%= f.radio_button :budget, "5000円以下", class: 'radio-label', id: 'a2' %>
+        <%= f.label :budget, "5000円以下", {value: 5000, class: 'btn btn-gradient-radius-input budget-button', for: 'a2'} %>
+      </div>
+      <div class="col-sm-7 mb-4">
+        <%= f.radio_button :budget, "8000円以下", class: 'radio-label', id: 'a3' %>
+        <%= f.label :budget, "8000円以下", {value: 8000, class: 'btn btn-gradient-radius-input budget-button', for: 'a3'} %>
+      </div>
+      <div class="col-sm-7 mb-4">
+        <%= f.radio_button :budget, "12000円以下", class: 'radio-label', id: 'a4' %>
+        <%= f.label :budget, "12000円以下", {value: 12000, class: 'btn btn-gradient-radius-input budget-button', for: 'a4'} %>
+      </div>
+      <div class="col-sm-7 mb-4">
+        <%= f.radio_button :budget, "15000円以下", class: 'radio-label', id: 'a5' %>
+        <%= f.label :budget, "15000円以下", {value: 15000, class: 'btn btn-gradient-radius-input budget-button', for: 'a5'} %>    
+      </div>  
+    </div>
+    <input type="button" value="目的選択画面に戻る" onclick="window.location.reload();" />
+  </div>
+  
+  <div class="select-result">
+
+    <div class="select-flex">
+      <div class="select-flex-box1">
+        <h2 class="select-h2 text-left mb-4">目的</h2>
+        <p class="purpose-content mb-4"></p>
+        <h2 class="select-h2 text-left mb-4">費用</h2>
+        <p class="budget-content mb-4"></p>      
+      </div>      
+
+      <div class="select-flex-box1">
+        <div class="select-submit-button">
+          <%= f.submit '作成', class: 'btn btn-circle-flat' %>  
+        </div>
+      </div>
+    </div>
+    <input type="button" value="目的選択画面に戻る" onclick="window.location.reload();" />
+
+
+
   </div>
 
-  <div class="form-group">
-    <%= f.submit '検索', class: 'btn btn-primary btn-block' %>
-  </div>
 <% end %>
+

@@ -1,11 +1,15 @@
 <% if current_user.like?(supplement) %>
-  <%= form_with(model: current_user.favorites.find_by(supplement_id: supplement.id), local: true, method: :delete) do |f| %>
+  <%= form_with(model: current_user.favorites.find_by(supplement_id: supplement.id), method: :delete) do |f| %>
     <%= hidden_field_tag :supplement_id, supplement.id %>
-    <%= f.submit 'Unlike', class: 'btn btn-danger btn-block' %>
+    <%= button_tag( class: "btn favorite_btn") do %>
+      <%= content_tag :i, "", class: "fas fa-star" %>  
+    <% end %>
   <% end %>
 <% else %>
-  <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+  <%= form_with(model: current_user.favorites.build) do |f| %>
     <%= hidden_field_tag :supplement_id, supplement.id %>
-    <%= f.submit 'like', class: 'btn btn-primary btn-block' %>
+    <%= button_tag( class: "btn favorite_btn") do %>
+      <%= content_tag :i, "", class: "far fa-star" %>  
+    <% end %>
   <% end %>
 <% end %>

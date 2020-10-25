@@ -6,6 +6,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @menu = @user.menus.where(saving: 1).order(id: :desc).page(params[:page]).per(5)
+    @using = @user.using.page(params[:page])
+    @calendars = @user.calendars.page(params[:page])
+    @likes = @user.likes.page(params[:page])
   end
 
   def new
